@@ -17,7 +17,7 @@ function GetItemsMarkup()
 str = str .. "<title>" .. UnitFullName("player") .. " - Inventory</title>"
 
 str = str .. [[<style>
-  html{color-scheme: dark light; font-family: sans-serif;}
+  html{background: #111; color: #fff; font-family: sans-serif;}
   body {line-height: 1.4; margin: 1rem; }
   .grid {
   display: grid;
@@ -40,7 +40,11 @@ str = str .. [[<style>
       if item == nil then
         str = str .. "free slot\n"
       else
-        str = str .. "<a data-wowhead=\"item=" .. item.itemID .. "\" href=\"https://www.wowhead.com/classic/item=" .. item.itemID .. "\" data-quality=\"" .. item.quality .. "\">" .. item.itemName .. "</a><br>"
+        str = str .. "<a data-wowhead=\"item=" .. item.itemID .. "\" href=\"https://www.wowhead.com/classic/item=" .. item.itemID .. "\" data-quality=\"" .. item.quality .. "\">"
+        if item.stackCount > 1 then
+          str = str .. item.stackCount .. " "
+        end
+        str = str .. item.itemName .. "</a><br>"
       end
     end
     str = str .. "</div>\n\n"
