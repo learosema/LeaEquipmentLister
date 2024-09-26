@@ -13,14 +13,26 @@ function GetItemsMarkup()
 <!DOCTYPE html>
 <html>
 <head>
-<title>Moo</title>
-<style>html{color-scheme: dark-light; font-family: sans-serif;}</style>
+]]
+str = str .. "<title>" .. UnitFullName("player") .. " - Inventory</title>"
+
+str = str .. [[<style>
+  html{color-scheme: dark light; font-family: sans-serif;}
+  body {line-height: 1.4; margin: 1rem; }
+  .grid {
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 30ch), 1fr));
+  }
+</style>
+
 </head>
 <body>
 ]]
   str = str .. "<h1>Inventory of " .. UnitFullName("player") .. "</h1>\n"
+  str = str .. "<div class=\"grid\">"
   for bag = 0,4 do
-    str = str .. "<h2>Bag " .. bag .. "</h2>\n"
+    str = str .. "<div class=\"bag\"><h2>Bag " .. bag .. "</h2>\n"
     local slots = C_Container.GetContainerNumSlots(bag)
     for slot = 1,slots do
       local item = C_Container.GetContainerItemInfo(bag, slot)
@@ -31,9 +43,9 @@ function GetItemsMarkup()
         str = str .. "<a data-wowhead=\"item=" .. item.itemID .. "\" href=\"https://www.wowhead.com/classic/item=" .. item.itemID .. "\" data-quality=\"" .. item.quality .. "\">" .. item.itemName .. "</a><br>"
       end
     end
-    str = str .. "\n\n"
+    str = str .. "</div>\n\n"
   end
-  
+  str = str .. "</div>"
   str = str .. [[
   <script>const whTooltips = {colorLinks: true, iconizeLinks: true, renameLinks: true};</script>
   <script src="https://wow.zamimg.com/js/tooltips.js"></script>
