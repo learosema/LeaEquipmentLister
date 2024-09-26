@@ -1,0 +1,8 @@
+## Interface: 11500
+## Title: Lea's Equipment Lister
+## Notes: Spits out some markdown containing all your equipment
+## Author: Lea Rosema
+## Version: 0.1
+
+embeds.xml
+LeaEquipmentLister.lua
