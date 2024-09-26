@@ -41,10 +41,11 @@ str = str .. [[<style>
         str = str .. "free slot\n"
       else
         str = str .. "<a data-wowhead=\"item=" .. item.itemID .. "\" href=\"https://www.wowhead.com/classic/item=" .. item.itemID .. "\" data-quality=\"" .. item.quality .. "\">"
+        str = str .. item.itemName .. "</a>"
         if item.stackCount > 1 then
-          str = str .. item.stackCount .. " "
+          str = str .. " (" .. item.stackCount .. ")"
         end
-        str = str .. item.itemName .. "</a><br>"
+        str = str .. "<br>"
       end
     end
     str = str .. "</div>\n\n"
