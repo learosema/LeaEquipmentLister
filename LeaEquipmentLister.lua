@@ -79,7 +79,7 @@ str = str .. [[<style>
   str = str .. "<h2>Inventory</h2>\n"
   str = str .. "<div class=\"grid\">"
   for bag = 0,4 do
-    str = str .. "<div class=\"bag\"><h2>Bag " .. bag .. "</h2>\n"
+    str = str .. "<div class=\"bag\"><h3>Bag " .. bag .. "</h3>\n"
     local slots = C_Container.GetContainerNumSlots(bag)
     for slot = 1,slots do
       local item = C_Container.GetContainerItemInfo(bag, slot)
@@ -87,7 +87,12 @@ str = str .. [[<style>
         str = str .. "free slot<br>"
       else
         local itemLink = item.hyperlink
-        str = str .. "<a data-wowhead=\"item=" .. item.itemID .. "\" href=\"https://www.wowhead.com/classic/item=" .. item.itemID .. "\" data-quality=\"" .. item.quality .. "\">"
+        local _, enchantID = GetLinkData(itemLink)
+        str = str .. "<a data-wowhead=\"item=" .. item.itemID
+        if enchantID ~= nil then
+          str = str .. "&amp;ench=" .. enchantID
+        end
+        str = str .. "\" href=\"https://www.wowhead.com/classic/item=" .. item.itemID .. "\" data-quality=\"" .. item.quality .. "\">"
         str = str .. item.itemName .. "</a>"
         if item.stackCount > 1 then
           str = str .. " (" .. item.stackCount .. ")"
